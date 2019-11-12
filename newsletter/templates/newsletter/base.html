@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>VPN Newsletter</title>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+
+		<!-- Main CSS -->
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{% static 'newsletter/main.css' %}"
+		/>
+		<!-- Bootstrap CSS -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+
+		<script src="{% static '\js\node_modules\jquery\dist\jquery.min.js' %}"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-light bg-light sticky-top">
+			<a class="navbar-brand pl-3" href="{% url 'home' %}">
+				<img
+					src="https://drive.google.com/uc?id=1FodyH5tqCFF_FvtTvPStv3_qwJsUke1L"
+					width="auto"
+					height="30"
+					class="d-inline-block align-top pl-1"
+					alt=""
+				/>
+			</a>
+			<ul class="nav justify-content-end">
+				<!-- permission is user is logged in -->
+				{% if user.is_authenticated %}
+				<!-- permission to send or delete all if user is staff or super -->
+				{% if user.is_staff or user.is_superuser %}
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'reset' %}">Reset Newsletter</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'email' %}">Send Newsletter</a>
+				</li>
+				{% endif %}
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'edit' %}">Edit Newsletter</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a
+						class="nav-link dropdown-toggle"
+						data-toggle="dropdown"
+						href="#"
+						role="button"
+						aria-haspopup="true"
+						aria-expanded="false"
+						>Add To Section</a
+					>
+					<div class="dropdown-menu">
+						{% include 'newsletter/links/dropdownlinks.html' %}
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'logout' %}">Logout</a>
+				</li>
+				{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'login' %}">Login</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'register' %}">Register</a>
+				</li>
+				{% endif %}
+			</ul>
+		</nav>
+		<div class="container-fluid">
+			{% block content %} {% endblock content %}
+		</div>
+		<script src="{% static '/js/base.js' %}"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>

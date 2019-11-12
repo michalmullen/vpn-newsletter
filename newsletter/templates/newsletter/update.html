@@ -1,0 +1,49 @@
+{% extends 'newsletter/base.html' %} {% load crispy_forms_tags %}
+<!---->
+{% block content %}
+<div class="row">
+	<div class="column left pt-4">
+		<div class="container">
+			<div class="scroll">
+				<nav class="navbar navbar-light px-0 justify-content-between">
+					<h3>{{ title }}</h3>
+					{% if '/news/' == request.path|slice:":6" %}
+					<a
+						class="btn btn-outline-primary"
+						href="{% url 'news-update-edit' news.id %}"
+						>Edit View</a
+					>
+					{% elif '/future/' == request.path|slice:":8" %}
+					<a
+						class="btn btn-outline-primary"
+						href="{% url 'future-update-edit' future.id %}"
+						>Edit View</a
+					>
+					{% elif '/release/' == request.path|slice:":9" %}
+					<a
+						class="btn btn-outline-primary"
+						href="{% url 'release-update-edit' release.id %}"
+						>Edit View</a
+					>
+					{% elif '/installs/' == request.path|slice:":10" %}
+					<a
+						class="btn btn-outline-primary"
+						href="{% url 'installs-update-edit' data1.id %}"
+						>Edit View</a
+					>
+					{% endif %}
+				</nav>
+				<form method="post">
+					{% csrf_token %}
+					{{ form.media }}
+					{{ form | crispy }}
+					<button type="submit" class="btn btn-primary">Update</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="column right" id="view">
+		{% include 'newsletter/newsletter.html' %}
+	</div>
+</div>
+{% endblock content %}

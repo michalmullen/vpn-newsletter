@@ -1,0 +1,156 @@
+<table
+	border="0"
+	cellpadding="0"
+	cellspacing="0"
+	style="width: 100%;"
+	width="100%"
+	role="presentation"
+>
+	<tbody>
+		<tr>
+			<td
+				style="vertical-align: top; background-color: #ffffff; width: 100%"
+				width="100%"
+				valign="top"
+				bgcolor="#ffffff"
+			>
+				<table
+					border="0"
+					cellpadding="0"
+					cellspacing="0"
+					style="width: 100%;"
+					width="100%"
+					role="presentation"
+				>
+					<tbody>
+						<tr>
+							<td
+								class="pc-sm-p-25-30-35 pc-xs-p-15-20-25"
+								style="vertical-align: top; padding: 30px 40px 0px;"
+								valign="top"
+							>
+								<table
+									border="0"
+									cellpadding="0"
+									cellspacing="0"
+									style="width: 100%;"
+									width="100%"
+									role="presentation"
+								>
+									<tbody>
+										<tr>
+											<td
+												class="pc-fb-font"
+												style="vertical-align: top; text-align: center; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 29px; font-weight: 700; line-height: 1.42; letter-spacing: -0.4px; color: #151515;"
+												valign="top"
+												align="center"
+											>
+												Release Status
+											</td>
+										</tr>
+										{% for post in release1 %}
+										<tr>
+											<!-- Beginning-->
+
+											<td style="vertical-align: top;" valign="top">
+												<table
+													class="pc-sm-w-100pc"
+													border="0"
+													cellpadding="0"
+													cellspacing="0"
+													align="left"
+													role="presentation"
+												>
+													<tbody>
+														<tr>
+															<td
+																class="pc-fb-font"
+																style="vertical-align: top; padding: 10px 15px 10px 0; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 700; line-height: 1.42; letter-spacing: -0.4px; color: #393b40"
+																valign="top"
+															>
+																{{ post.title }}
+															</td>
+														</tr>
+													</tbody>
+												</table>
+												<table
+													class="pc-sm-w-100pc"
+													border="0"
+													cellpadding="0"
+													cellspacing="0"
+													align="right"
+													role="presentation"
+												>
+													<tbody>
+														<tr>
+															<td
+																style="vertical-align: top; padding: 13px 0 10px;"
+																valign="top"
+															>
+																<table
+																	style="border-collapse: separate;"
+																	border="0"
+																	cellpadding="0"
+																	cellspacing="0"
+																	role="presentation"
+																>
+																	<tbody>
+																		<tr>
+																			<!-- orange: #F77514, green: #0CB754 -->
+																			<td
+																				style="vertical-align: top; text-align: center; border-radius: 14px; background-color: #0CB754; padding: 6px 9px 6px 12px"
+																				valign="top"
+																				align="center"
+																			>
+																				<a
+																					class="pc-fb-font"
+																					href="{{ post.link }}"
+																					style="text-decoration: none; word-break: break-word; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; display: block; font-size: 14px; font-weight: 500; color: #ffffff; line-height: 1"
+																					><span>Check in Jira</span>&nbsp;<img
+																						src="https://drive.google.com/uc?id=1E5hjG5gVGA2qhYO_bKLzVQKpxx5RXj4o"
+																						alt=""
+																						style="border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic"
+																						height="9"
+																						width="6"
+																				/></a>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+												<!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+											</td>
+										</tr>
+
+										<tr>
+											<td
+												class="pc-fb-font"
+												style="vertical-align: top; text-align: left; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 300; line-height: 1.56; letter-spacing: -0.2px; color: #9B9B9B;"
+												valign="top"
+												align="center"
+											>
+												{{ post.content | safe }}
+											</td>
+										</tr>
+										{% endfor %}
+										<!-- End -->
+
+										<td
+											height="20"
+											style="height: 30px; font-size: 1px; line-height: 1px;"
+										>
+											&nbsp;
+										</td>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>

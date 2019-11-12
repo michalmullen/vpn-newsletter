@@ -1,0 +1,41 @@
+{% extends 'newsletter/base.html' %} {% load crispy_forms_tags %}
+<!---->
+{% block content %}
+<div class="row">
+	<div class="column left pt-4">
+		<div class="container">
+			<div class="scroll">
+				<nav class="navbar navbar-light px-0 justify-content-between">
+					<h3>{{ title }}</h3>
+					{% if '/news/editview/' == request.path %}
+					<a class="btn btn-outline-primary" href="{% url 'news' %}"
+						>Production View</a
+					>
+					{% elif '/future/editview/' == request.path %}
+					<a class="btn btn-outline-primary" href="{% url 'future' %}"
+						>Production View</a
+					>
+					{% elif '/release/editview/' == request.path %}
+					<a class="btn btn-outline-primary" href="{% url 'release' %}"
+						>Production View</a
+					>
+					{% elif '/installs/editview/' == request.path %}
+					<a class="btn btn-outline-primary" href="{% url 'installs' %}"
+						>Production View</a
+					>
+					{% endif %}
+				</nav>
+				<form method="post">
+					{% csrf_token %}
+					{{ form.media }}
+					{{ form | crispy }}
+					<button type="submit" class="btn btn-primary">Add</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="column right">
+		{% include 'newsletter/newsletter_edit.html' %}
+	</div>
+</div>
+{% endblock content %}

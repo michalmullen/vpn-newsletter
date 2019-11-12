@@ -1,0 +1,71 @@
+<table
+	border="0"
+	cellpadding="0"
+	cellspacing="0"
+	style="width: 100%;"
+	width="100%"
+	role="presentation"
+>
+	<tbody>
+		<tr>
+			<td
+				class="pc-sm-p-40-30 pc-xs-p-30-20"
+				style="vertical-align: top; padding: 30px; padding-bottom: 0px; background-color: #ffffff"
+				valign="top"
+				bgcolor="#ffffff"
+			>
+				<table
+					border="0"
+					cellpadding="0"
+					cellspacing="0"
+					style="width: 100%;"
+					width="100%"
+					role="presentation"
+				>
+					<tbody>
+						<tr>
+							<td
+								class="pc-fb-font"
+								style="vertical-align: top; text-align: center; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 29px; font-weight: 700; line-height: 1.42; letter-spacing: -0.4px; color: #151515;"
+								valign="top"
+								align="center"
+								style="white-space: pre;"
+							>
+								News Highlights
+							</td>
+						</tr>
+						<tr>
+							<td
+								height="10"
+								style="height: 10px; font-size: 1px; line-height: 1px;"
+							>
+								&nbsp;
+							</td>
+						</tr>
+						{% for post in news1 %}
+						<tr>
+							<td
+								class="pc-fb-font"
+								style="vertical-align: top; text-align: center; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 300; line-height: 1.56; letter-spacing: -0.2px; color: #9B9B9B;"
+								valign="top"
+								align="center"
+								style="white-space: pre-line;"
+							>
+								{{ post.content | safe }}
+							</td>
+						</tr>
+						{% endfor %}
+						<tr class="ajax">
+							<td
+								height="20"
+								style="height: 20px; font-size: 1px; line-height: 1px;"
+							>
+								&nbsp;
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>

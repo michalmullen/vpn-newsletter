@@ -1,0 +1,41 @@
+{% if '/editview/' == request.path|slice:"15:" %}
+<a class="dropdown-item" href="{% url 'news-edit' %}">News Highlights</a>
+<a class="dropdown-item" href="{% url 'installs-edit' %}">Installs & Users</a>
+<a class="dropdown-item" href="{% url 'release-edit' %}">Release Status</a>
+<a class="dropdown-item" href="{% url 'future-edit' %}">Future Releases</a>
+{% elif '/news/' == request.path|slice:":6" %}
+<a class="dropdown-item" href="{% url 'news' %}">News Highlights</a>
+<a class="dropdown-item" href="{% url 'installs' %}">Installs & Users</a>
+<a class="dropdown-item" href="{% url 'release' %}">Release Status</a>
+<a class="dropdown-item" href="{% url 'future' %}">Future Releases</a>
+{% elif '/future/' == request.path|slice:":8" %}
+<a class="dropdown-item" href="{% url 'news' %}">News Highlights</a>
+<a class="dropdown-item" href="{% url 'installs' %}">Installs & Users</a>
+<a class="dropdown-item" href="{% url 'release' %}">Release Status</a>
+<a class="dropdown-item" href="{% url 'future' %}">Future Releases</a>
+{% elif '/release/' == request.path|slice:":9" %}
+<a class="dropdown-item" href="{% url 'news' %}">News Highlights</a>
+<a class="dropdown-item" href="{% url 'installs' %}">Installs & Users</a>
+<a class="dropdown-item" href="{% url 'release' %}">Release Status</a>
+<a class="dropdown-item" href="{% url 'future' %}">Future Releases</a>
+{% elif '/future/' == request.path|slice:":8" %}
+<a class="dropdown-item" href="{% url 'news' %}">News Highlights</a>
+<a class="dropdown-item" href="{% url 'installs' %}">Installs & Users</a>
+<a class="dropdown-item" href="{% url 'release' %}">Release Status</a>
+<a class="dropdown-item" href="{% url 'future' %}">Future Releases</a>
+{% elif '/email/' == request.path %}
+<a class="dropdown-item" href="{% url 'news' %}">News Highlights</a>
+<a class="dropdown-item" href="{% url 'installs' %}">Installs & Users</a>
+<a class="dropdown-item" href="{% url 'release' %}">Release Status</a>
+<a class="dropdown-item" href="{% url 'future' %}">Future Releases</a>
+{% elif '' == request.path %}
+<a class="dropdown-item" href="{% url 'news' %}">News Highlights</a>
+<a class="dropdown-item" href="{% url 'installs' %}">Installs & Users</a>
+<a class="dropdown-item" href="{% url 'release' %}">Release Status</a>
+<a class="dropdown-item" href="{% url 'future' %}">Future Releases</a>
+{% else %}
+<a class="dropdown-item" href="{% url 'news' %}">News Highlights</a>
+<a class="dropdown-item" href="{% url 'installs' %}">Installs & Users</a>
+<a class="dropdown-item" href="{% url 'release' %}">Release Status</a>
+<a class="dropdown-item" href="{% url 'future' %}">Future Releases</a>
+{% endif %}
