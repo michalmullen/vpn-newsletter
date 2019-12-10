@@ -529,7 +529,7 @@
 												<!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
 											</td>
 										</tr>
-										{% for post in data11 %}
+										{% for post in installs1 %}
 										<tr>
 											<td
 												class="pc-fb-font"
@@ -543,12 +543,12 @@
 												<div>
 													<a
 														class="btn btn-secondary btn-sm mt-1 mb-1"
-														href="{% url 'data-update-edit' post.id %}"
+														href="{% url 'installs-update-edit' post.id %}"
 														>Update</a
 													>
 													<a
 														class="btn btn-danger btn-sm mt-1 mb-1"
-														href="{% url 'data-delete' post.id %}"
+														href="{% url 'installs-delete' post.id %}"
 														>Delete</a
 													>
 												</div>
