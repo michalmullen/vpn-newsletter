@@ -49,7 +49,7 @@ def download(request):
     path = 'bin/wkhtmltoimage'
     config = imgkit.config(wkhtmltoimage=path)
     imgkit.from_string(html_cont, 'out.jpg', config=config)
-    #imgkit.from_string(html_cont, 'out.jpg')
+    # imgkit.from_string(html_cont, 'out.jpg')-
 
     fs = FileSystemStorage()
     filename = 'out.jpg'
