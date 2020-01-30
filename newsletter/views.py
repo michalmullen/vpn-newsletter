@@ -46,7 +46,7 @@ def download(request):
         html_cont, remove_all_empty_space=True, remove_comments=True)
 
     #path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltoimage.exe'
-    path = r'app\bin\wkhtmltoimage'
+    path = 'app/bin/wkhtmltoimage'
     config = imgkit.config(wkhtmltoimage=path)
     imgkit.from_string(html_cont, 'out.jpg', config=config)
 
