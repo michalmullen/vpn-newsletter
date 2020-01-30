@@ -46,10 +46,10 @@ def download(request):
         html_cont, remove_all_empty_space=True, remove_comments=True)
 
     #path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltoimage.exe'
-    path = 'app/bin/wkhtmltoimage'
+    path = 'bin/wkhtmltoimage'
     config = imgkit.config(wkhtmltoimage=path)
-    #imgkit.from_string(html_cont, 'out.jpg', config=config)
-    imgkit.from_string(html_cont, 'out.jpg')
+    imgkit.from_string(html_cont, 'out.jpg', config=config)
+    #imgkit.from_string(html_cont, 'out.jpg')
 
     fs = FileSystemStorage()
     filename = 'out.jpg'
