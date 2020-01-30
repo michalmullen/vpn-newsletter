@@ -2,6 +2,7 @@ import datetime
 import json
 
 import htmlmin
+import imgkit
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -16,6 +17,8 @@ from django.template import Context
 from django.template.loader import get_template
 from django.views.generic import CreateView, DeleteView, UpdateView
 from django.views.generic.edit import FormMixin
+from django.utils.encoding import smart_str
+from django.core.files.storage import FileSystemStorage
 
 from .forms import EmailForm, ResetForm
 from .models import Installs, Future, News, Release
@@ -25,6 +28,33 @@ now = datetime.datetime.now()
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
           'October', 'November', 'December']
 DATE = str(now.day) + " " + MONTHS[now.month - 1] + " " + str(now.year)
+
+
+@login_required
+def download(request):
+    html_email = get_template(
+        'newsletter/newsletter.html')
+    cnt = {'news1': News.objects.all(),
+           'release1': Release.objects.all(),
+           'future1': Future.objects.all(),
+           'Installs1': Installs.objects.all(),
+           'date': DATE, }
+    # renders html email with the given context
+    html_cont = html_email.render(cnt)
+    # optimizes the email by removing spaces and comments
+    html_cont = htmlmin.minify(
+        html_cont, remove_all_empty_space=True, remove_comments=True)
+
+    path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltoimage.exe'
+    config = imgkit.config(wkhtmltoimage=path)
+    imgkit.from_string(html_cont, 'out.jpg', config=config)
+
+    fs = FileSystemStorage()
+    filename = 'out.jpg'
+    with fs.open(filename) as pdf:
+        response = HttpResponse(pdf, content_type='application/jpg')
+        response['Content-Disposition'] = 'attachment; filename="out.jpg"'
+        return response
 
 
 # resets newsletter by deleting all posts added to it
