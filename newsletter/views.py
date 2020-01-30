@@ -48,7 +48,8 @@ def download(request):
     #path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltoimage.exe'
     path = 'app/bin/wkhtmltoimage'
     config = imgkit.config(wkhtmltoimage=path)
-    imgkit.from_string(html_cont, 'out.jpg', config=config)
+    #imgkit.from_string(html_cont, 'out.jpg', config=config)
+    imgkit.from_string(html_cont, 'out.jpg')
 
     fs = FileSystemStorage()
     filename = 'out.jpg'
