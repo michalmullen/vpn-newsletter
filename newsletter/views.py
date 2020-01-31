@@ -2,7 +2,7 @@ import datetime
 import json
 
 import htmlmin
-import imgkit
+import requests
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -45,17 +45,26 @@ def download(request):
     html_cont = htmlmin.minify(
         html_cont, remove_all_empty_space=True, remove_comments=True)
 
-    #path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltoimage.exe'
-    path = 'app/bin/wkhtmltoimage'
-    #config = imgkit.config(wkhtmltoimage=path)
-    imgkit.from_string(html_cont, 'out.jpg', config=config)
-    imgkit.from_string(html_cont, 'out.jpg')
+    HCTI_API_ENDPOINT = "https://hcti.io/v1/image"
+    HCTI_API_USER_ID = '374023f3-5b29-4508-b7eb-d265edf16713'
+    HCTI_API_KEY = '27c9a5d8-2687-40ca-8584-de2237f52003'
+
+    data = {'html': html_cont}
+
+    image = requests.post(url=HCTI_API_ENDPOINT, data=data,
+                          auth=(HCTI_API_USER_ID, HCTI_API_KEY))
+
+    url = image.json()['url']
+    print(url)
+
+    download = requests.get(url)
+    open("out.png", 'wb').write(download.content)
 
     fs = FileSystemStorage()
-    filename = 'out.jpg'
+    filename = 'out.png'
     with fs.open(filename) as pdf:
-        response = HttpResponse(pdf, content_type='application/jpg')
-        response['Content-Disposition'] = 'attachment; filename="out.jpg"'
+        response = HttpResponse(pdf, content_type='application/png')
+        response['Content-Disposition'] = 'attachment; filename="out.png"'
         return response
 
 
