@@ -55,16 +55,15 @@ def download(request):
                           auth=(HCTI_API_USER_ID, HCTI_API_KEY))
 
     url = image.json()['url']
-    print(url)
 
     download = requests.get(url)
-    open("out.png", 'wb').write(download.content)
+    open("newsletter.png", 'wb').write(download.content)
 
     fs = FileSystemStorage()
-    filename = 'out.png'
+    filename = 'newsletter.png'
     with fs.open(filename) as pdf:
         response = HttpResponse(pdf, content_type='application/png')
-        response['Content-Disposition'] = 'attachment; filename="out.png"'
+        response['Content-Disposition'] = 'attachment; filename="newsletter.png"'
         return response
 
 
