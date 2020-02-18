@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # py .\manage.py runserver 10.7.200.174:1234
 ALLOWED_HOSTS = ['10.7.200.174', '127.0.0.1', 'vpn-newsletter.heroku.com']
