@@ -2,6 +2,7 @@ import datetime
 import json
 
 import htmlmin
+import requests
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -16,6 +17,8 @@ from django.template import Context
 from django.template.loader import get_template
 from django.views.generic import CreateView, DeleteView, UpdateView
 from django.views.generic.edit import FormMixin
+from django.utils.encoding import smart_str
+from django.core.files.storage import FileSystemStorage
 
 from .forms import EmailForm, ResetForm
 from .models import Installs, Future, News, Release
@@ -25,6 +28,43 @@ now = datetime.datetime.now()
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
           'October', 'November', 'December']
 DATE = str(now.day) + " " + MONTHS[now.month - 1] + " " + str(now.year)
+
+
+@login_required
+def download(request):
+    html_email = get_template(
+        'newsletter/newsletter.html')
+    cnt = {'news1': News.objects.all(),
+           'release1': Release.objects.all(),
+           'future1': Future.objects.all(),
+           'Installs1': Installs.objects.all(),
+           'date': DATE, }
+    # renders html email with the given context
+    html_cont = html_email.render(cnt)
+    # optimizes the email by removing spaces and comments
+    html_cont = htmlmin.minify(
+        html_cont, remove_all_empty_space=True, remove_comments=True)
+
+    HCTI_API_ENDPOINT = "https://hcti.io/v1/image"
+    HCTI_API_USER_ID = '374023f3-5b29-4508-b7eb-d265edf16713'
+    HCTI_API_KEY = '27c9a5d8-2687-40ca-8584-de2237f52003'
+
+    data = {'html': html_cont}
+
+    image = requests.post(url=HCTI_API_ENDPOINT, data=data,
+                          auth=(HCTI_API_USER_ID, HCTI_API_KEY))
+
+    url = image.json()['url']
+
+    download = requests.get(url)
+    open("newsletter.png", 'wb').write(download.content)
+
+    fs = FileSystemStorage()
+    filename = 'newsletter.png'
+    with fs.open(filename) as pdf:
+        response = HttpResponse(pdf, content_type='application/png')
+        response['Content-Disposition'] = 'attachment; filename="newsletter.png"'
+        return response
 
 
 # resets newsletter by deleting all posts added to it

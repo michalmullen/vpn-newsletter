@@ -10,10 +10,10 @@ urlpatterns = [
     # edit home page
     path('edit/', NewsCreateView.as_view(
         template_name="newsletter/home_edit.html"), name='edit'),
-    # send email
+    # email functions
     path('email/', views.send_email, name='email'),
-    # send email
     path('email/reset/', views.reset_email, name='reset'),
+    path('email/download/', views.download, name='download'),
     # create page with final view
     path('news/', NewsCreateView.as_view(
         template_name="newsletter/add.html"), name='news'),
